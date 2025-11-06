@@ -13,7 +13,6 @@ function App() {
   const addData = () => {
     if (inputValue.trim() === "") return;
     if (edit) {
-      console.log("updatingItem");
       const newList = [...list];
       newList[currentIndex] = inputValue;
       setList(newList);
@@ -22,7 +21,6 @@ function App() {
     } else {
       setList([...list, inputValue]);
     }
-    // clear input field
     setInputValue("");
   };
 
@@ -31,62 +29,73 @@ function App() {
   };
 
   const updateItem = (index) => {
-    console.log("updateItem");
     setInputValue(list[index]);
-
     setEdit(true);
     setCurrentIndex(index);
   };
+
   return (
-    <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
-      <h1 className="text-3xl font-bold mb-6">📝 Todo List</h1>
+    <div
+      className="min-h-screen flex flex-col items-center justify-center"
+      style={{
+        backgroundImage:
+          "url('https://images.pexels.com/photos/2736499/pexels-photo-2736499.jpeg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-xl w-full max-w-md">
+        <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">
+          📝 Todo List
+        </h1>
 
-      <div className="flex mb-4 w-full max-w-md">
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleInput}
-          placeholder="Enter item"
-          className="flex-1 border p-2 rounded-l-md focus:outline-none"
-        />
-        <button
-          onClick={addData}
-          className={`${
-            edit
-              ? "bg-amber-500 hover:bg-amber-600"
-              : "bg-green-700 hover:bg-green-800"
-          } text-white border border-black px-4 py-2 rounded-r-md transition`}
-        >
-          {edit ? "Update" : "Add"}
-        </button>
-      </div>
-
-      <ul className="w-full max-w-md space-y-3">
-        {list.map((data, index) => (
-          <li
-            key={index}
-            className="flex justify-between items-center bg-white shadow-md p-3 rounded-lg"
+        <div className="flex mb-6">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleInput}
+            placeholder="Enter item"
+            className="flex-1 border border-gray-500 p-3 rounded-l-lg focus:outline-none focus:border-green-500"
+          />
+          <button
+            onClick={addData}
+            className={`${
+              edit
+                ? "bg-amber-500 hover:bg-amber-600"
+                : "bg-green-700 hover:bg-green-800"
+            } text-white px-5 py-3 rounded-r-lg font-semibold transition`}
           >
-            <span className="text-gray-800">{data}</span>
+            {edit ? "Update" : "Add"}
+          </button>
+        </div>
 
-            <div className="flex space-x-2">
-              <button
-                onClick={() => updateItem(index)}
-                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
-              >
-                Edit
-              </button>
+        <ul className="space-y-4">
+          {list.map((data, index) => (
+            <li
+              key={index}
+              className="flex justify-between items-center bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition"
+            >
+              <span className="text-gray-800 font-medium">{data}</span>
 
-              <button
-                onClick={() => deleteItem(index)}
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
-              >
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => updateItem(index)}
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition font-medium"
+                >
+                  Edit
+                </button>
+
+                <button
+                  onClick={() => deleteItem(index)}
+                  className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition font-medium"
+                >
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
