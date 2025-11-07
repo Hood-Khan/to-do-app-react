@@ -44,7 +44,7 @@ function App() {
         backgroundPosition: "center",
       }}
     >
-      <div className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-xl w-full max-w-md">
+      <div className="bg-gray-300 backdrop-blur-md p-8 rounded-2xl shadow-xl w-full max-w-md">
         <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">
           📝 Todo List
         </h1>
